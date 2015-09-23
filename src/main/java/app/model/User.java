@@ -1,10 +1,17 @@
 package app.model;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -20,6 +27,17 @@ public class User {
 	String username;
 	@Column(name = "password")
 	String password;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "postedBy")
+	private List<Status> liststatus;
+
+	public List<Status> getListstatus() {
+		return liststatus;
+	}
+
+	public void setListstatus(List<Status> liststatus) {
+		this.liststatus = liststatus;
+	}
 
 	public User() {
 

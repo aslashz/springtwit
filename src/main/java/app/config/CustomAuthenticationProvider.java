@@ -25,9 +25,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		// TODO Auto-generated method stub
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
-		List<User> possibleUser = userRepository.findByUsername(username);
-		if (possibleUser.isEmpty() == false && possibleUser.get(0).getUsername().equals(username)
-				&& possibleUser.get(0).getPassword().equals(password)) {
+		User possibleUser = userRepository.findByUsername(username);
+		if (possibleUser != null && possibleUser.getUsername().equals(username)
+				&& possibleUser.getPassword().equals(password)) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<>();
 			grantedAuths.add(new SimpleGrantedAuthority("USER"));
 			Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
