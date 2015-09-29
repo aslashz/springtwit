@@ -21,6 +21,14 @@ public class Status {
 	@JoinColumn(name = "userid", nullable = false)
 	private User postedBy;
 
+	public Status() {
+
+	}
+
+	public Status(User postedBy) {
+		this.postedBy = postedBy;
+	}
+
 	public long getStatusid() {
 		return statusid;
 	}
@@ -46,4 +54,10 @@ public class Status {
 	}
 
 	private String message;
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("Status [msg : %s, postedBy : %s]", this.message, this.postedBy.getUsername());
+	}
 }

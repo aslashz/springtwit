@@ -36,11 +36,22 @@ public class Application implements CommandLineRunner {
 		// add user to repository //
 		User user1 = new User("user1", "user1");
 		User user2 = new User("user2", "user2");
+		User user3 = new User("user3", "user3");
+		User user4 = new User("user4", "user4");
+		User user5 = new User("user5", "user5");
 
 		userRepository.save(user1);
 		userRepository.save(user2);
+		userRepository.save(user3);
+		userRepository.save(user4);
+		userRepository.save(user5);
 
 		subscibeRepository.save(new Subscribe(user1, user2));
+		subscibeRepository.save(new Subscribe(user1, user3));
+		subscibeRepository.save(new Subscribe(user4, user1));
+		subscibeRepository.save(new Subscribe(user5, user1));
+		subscibeRepository.save(new Subscribe(user3, user1));
+		
 		List<Subscribe> resultFromUser1 = subscribeRepositoryImpl.findByFromUsername("user1");
 		log.info("SIZE : " + resultFromUser1.size() + "");
 	}

@@ -1,7 +1,12 @@
 package app.config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,10 +15,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import app.model.User;
 import app.model.UserRepository;
+
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
@@ -41,6 +48,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public boolean supports(Class<?> authentication) {
 		// TODO Auto-generated method stub
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
+	}
+
+}
+
+@Component
+class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+
 	}
 
 }
